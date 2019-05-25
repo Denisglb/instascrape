@@ -47,46 +47,46 @@ class Scraper
 		# NEED TO PARSE DATA PROPERLY HERE
 
 		info = @page.body.split("<script type=\"text/javascript\">window._sharedData = ")[1]
-		json = info.split(";</script>\n<script type=\"text/javascript\">window.__initialDataLoaded(window._sharedData);")[0].delete! '\\'
+		json = info.split(";</script>\n<script type=\"text/javascript\">window.__initialDataLoaded(window._sharedData);")[0]
 
-		json
-		begin
-  			JSON.parse(json)
-		rescue JSON::ParserError => ex
-			# puts "An error with message is #{ex.message}"
-			p ex.message.class
-			matches = ex.message.match("\"")
-			p matches
-		end
-		# parsed_data = JSON.parse(json)
+		# json
+		# begin
+  # 			JSON.parse(json)
+		# rescue JSON::ParserError => ex
+		# 	# puts "An error with message is #{ex.message}"
+		# 	p ex.message.class
+		# 	matches = ex.message.scan("")
+		# 	p matches
+		# end
+		parsed_data = JSON.parse(json)
 
-		# puts "Biography -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["biography"].to_s
+		puts "Biography -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["biography"].to_s
 
-		# puts "Followers -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_followed_by"]["count"].to_s
+		puts "Followers -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_followed_by"]["count"].to_s
 
-		# puts "Following -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_follow"].to_s
+		puts "Following -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_follow"].to_s
 
-		# puts "Is a Business Account -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["is_business_account"].to_s
+		puts "Is a Business Account -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["is_business_account"].to_s
 
-		# puts "Business Category name -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["business_category_name"].to_s
+		puts "Business Category name -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["business_category_name"].to_s
 
-		# puts "User name -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["username"].to_s
+		puts "User name -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["username"].to_s
 
-		# puts "Number of Posts -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_owner_to_timeline_media"]["count"].to_s
+		puts "Number of Posts -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_owner_to_timeline_media"]["count"].to_s
 
-		# puts "Page Info -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_owner_to_timeline_media"]["page_info"].to_s
+		puts "Page Info -> " + parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_owner_to_timeline_media"]["page_info"].to_s
 
-		# puts "Information from posts"
-		# posts = parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]
+		puts "Information from posts"
+		posts = parsed_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]
 		
-		# p "Captions of Post -> " + posts["node"]["edge_media_to_caption"]["edges"][0]["node"]["text"].to_s
-		# p "Number of comments for Post -> " + posts["node"]["edge_media_to_comment"]["count"].to_s
-		# p "Time Posted -> " + Time.at(posts["node"]["taken_at_timestamp"]).to_datetime.to_s
-		# p "Number of likes of the post -> " + posts["node"]["edge_liked_by"]["count"].to_s
-		# p "Location Tags -> " + posts["node"]["location"].to_s
-		# p "Owner of the post -> " + posts["node"]["owner"].to_s
-		# p "Is it a Video -> " + posts["node"]["is_video"].to_s
-		# p "Video Views -> " + posts["node"]["video_view_count"].to_s
+		p "Captions of Post -> " + posts["node"]["edge_media_to_caption"]["edges"][0]["node"]["text"].to_s
+		p "Number of comments for Post -> " + posts["node"]["edge_media_to_comment"]["count"].to_s
+		p "Time Posted -> " + Time.at(posts["node"]["taken_at_timestamp"]).to_datetime.to_s
+		p "Number of likes of the post -> " + posts["node"]["edge_liked_by"]["count"].to_s
+		p "Location Tags -> " + posts["node"]["location"].to_s
+		p "Owner of the post -> " + posts["node"]["owner"].to_s
+		p "Is it a Video -> " + posts["node"]["is_video"].to_s
+		p "Video Views -> " + posts["node"]["video_view_count"].to_s
 
 	end
 
